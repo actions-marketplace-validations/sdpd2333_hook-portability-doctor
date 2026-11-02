@@ -1,0 +1,6 @@
+{
+  "description": "Original example: structurally supported, execution still unverified.",
+  "hooks": {
+    "Stop": [{"hooks": [{"type": "command", "command": "python -c \"print('done')\"", "timeout": 5}]}]
+  }
+}

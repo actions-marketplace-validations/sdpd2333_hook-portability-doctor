@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "package": "@deepseek-ai/dsh-hooks-claude-code",
+  "version": "0.2.1-rc.5",
+  "module_sha256": "c4f3f5d92c82e790593d977d95eef0afa4ffad07bb9b9d1609ae613fe6a76283",
+  "node": "v24.20.0",
+  "platform": "win32",
+  "checks": [
+    {
+      "name": "missing-type-defaults-to-command",
+      "passed": true
+    },
+    {
+      "name": "nonstring-type-defaults-to-command",
+      "passed": true
+    },
+    {
+      "name": "prompt-handler-is-skipped",
+      "passed": true
+    },
+    {
+      "name": "unsupported-event-invalid-matcher-does-not-reject-config",
+      "passed": true
+    },
+    {
+      "name": "invalid-supported-matcher-rejects-entire-config",
+      "passed": true
+    },
+    {
+      "name": "stop-matcher-is-discarded-before-regex-validation",
+      "passed": true
+    },
+    {
+      "name": "matcher-is-not-parsed-without-runnable-handlers",
+      "passed": true
+    },
+    {
+      "name": "root-substitution-args-and-timeout-contract",
+      "passed": true
+    }
+  ],
+  "mode": "real-bridge-recording-context-shell-intercepted",
+  "subprocess_execution_tested": false,
+  "installed_git_revision_known": false
+}

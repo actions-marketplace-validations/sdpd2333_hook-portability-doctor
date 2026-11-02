@@ -1,0 +1,65 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/probe.cjs\" start",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "[",
+        "hooks": [
+          {
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/probe.cjs\" prompt",
+            "timeout": 10,
+            "args": [
+              "not-passed"
+            ]
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "read",
+        "hooks": [
+          {
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/probe.cjs\" read",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "[",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "skip this"
+          },
+          {
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/probe.cjs\" stop",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "[",
+        "hooks": [
+          {
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/probe.cjs\" unsupported",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "cases": [
+    {
+      "id": "context-mode",
+      "repository": "mksglu/context-mode",
+      "revision": "78d3dd080e4f52c9e3a81a63cd7eb369d8bb8d02",
+      "path": "hooks/hooks.json",
+      "sha256": "e1fdd0c0e82d164f119daa43803513b802ca5edab93bc123b2c7d8d4c637cf3e",
+      "expected_incompatible_events": ["PreCompact"]
+    },
+    {
+      "id": "claude-mem",
+      "repository": "thedotmack/claude-mem",
+      "revision": "02584c4ac9d92fea45adf5c61e22c546b5738621",
+      "path": "plugin/hooks/hooks.json",
+      "sha256": "8a231036f088798179ae54e8f2b792334191289148b4461698dc1823b51024a2",
+      "expected_incompatible_events": ["PostToolUseFailure", "SessionEnd", "Setup"]
+    },
+    {
+      "id": "superpowers",
+      "repository": "obra/superpowers",
+      "revision": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
+      "path": "hooks/hooks.json",
+      "sha256": "47fd72cc8bedf31c72702b35b4ed7bab670294d658c4ce518330337525a3798b",
+      "expected_incompatible_events": []
+    }
+  ]
+}

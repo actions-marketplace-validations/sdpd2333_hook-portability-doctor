@@ -1,0 +1,126 @@
+{
+  "schema_version": "1",
+  "analyzer_version": "0.1.0",
+  "target": "dsh-claude-bridge",
+  "profile_id": "dsh-claude-ce7073d",
+  "target_package": "@deepseek-ai/dsh-hooks-claude-code",
+  "repository_revision": "ce7073d51254c26cd63b22a60835b8f948deb447",
+  "profile_checked_date": "2026-11-03",
+  "target_runtime_verified": false,
+  "execution_verified": false,
+  "input": {
+    "file": "mksglu/context-mode@78d3dd080e4f/hooks/hooks.json",
+    "sha256": "e1fdd0c0e82d164f119daa43803513b802ca5edab93bc123b2c7d8d4c637cf3e",
+    "format": "wrapped"
+  },
+  "context": {
+    "plugin_root_provided": false,
+    "project_dir_provided": false
+  },
+  "summary": {
+    "status": "incompatibilities_found",
+    "event_types": 6,
+    "configured_handlers": 14,
+    "candidate_command_handlers": 13,
+    "finding_count": 3,
+    "affected_locations": 24,
+    "categories": {
+      "incompatible": 1,
+      "behavior_change": 0,
+      "configuration": 1,
+      "manual_review": 1
+    }
+  },
+  "findings": [
+    {
+      "id": "79b359d976a4",
+      "rule_id": "HP005",
+      "category": "configuration",
+      "certainty": "needs-context",
+      "pointer": "/hooks/PostToolUse/0/hooks/0/command",
+      "message": "命令引用 CLAUDE_PLUGIN_ROOT，本次检查未收到 pluginRoot；不能据此断言用户没有配置。",
+      "suggestion": "用 --plugin-root 提供目标桥的实际插件根目录后复查。",
+      "evidence_ids": [
+        "DSH-CONFIG"
+      ],
+      "related_pointers": [
+        "/hooks/PostToolUse/0/hooks/0/command",
+        "/hooks/PreToolUse/0/hooks/0/command",
+        "/hooks/PreToolUse/1/hooks/0/command",
+        "/hooks/PreToolUse/2/hooks/0/command",
+        "/hooks/PreToolUse/3/hooks/0/command",
+        "/hooks/PreToolUse/4/hooks/0/command",
+        "/hooks/PreToolUse/5/hooks/0/command",
+        "/hooks/PreToolUse/6/hooks/0/command",
+        "/hooks/PreToolUse/7/hooks/0/command",
+        "/hooks/PreToolUse/8/hooks/0/command",
+        "/hooks/SessionStart/0/hooks/0/command",
+        "/hooks/Stop/0/hooks/0/command",
+        "/hooks/UserPromptSubmit/0/hooks/0/command"
+      ]
+    },
+    {
+      "id": "68907be7177b",
+      "rule_id": "HP006",
+      "category": "manual_review",
+      "certainty": "needs-context",
+      "pointer": "/hooks/PostToolUse/0/matcher",
+      "message": "工具名与目标正则语义需要运行核对。",
+      "suggestion": "核对实际匹配主体；本工具不使用 Python 正则冒充目标正则验证。",
+      "evidence_ids": [
+        "DSH-CONFIG"
+      ],
+      "related_pointers": [
+        "/hooks/PostToolUse/0/matcher",
+        "/hooks/PreToolUse/0/matcher",
+        "/hooks/PreToolUse/1/matcher",
+        "/hooks/PreToolUse/2/matcher",
+        "/hooks/PreToolUse/3/matcher",
+        "/hooks/PreToolUse/4/matcher",
+        "/hooks/PreToolUse/5/matcher",
+        "/hooks/PreToolUse/6/matcher",
+        "/hooks/PreToolUse/7/matcher",
+        "/hooks/PreToolUse/8/matcher"
+      ]
+    },
+    {
+      "id": "256819bfc94e",
+      "rule_id": "HP001",
+      "category": "incompatible",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/PreCompact",
+      "message": "目标不识别此事件，整组配置会在解析处理器之前被忽略。",
+      "suggestion": "核对源平台事件名称；需要保留该功能时寻找目标的原生入口。删除配置不等于完成迁移。",
+      "evidence_ids": [
+        "DSH-CONFIG"
+      ]
+    }
+  ],
+  "evidence": {
+    "DSH-CONFIG": {
+      "title": "目标配置解析器：事件、处理器、字段和替换",
+      "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ce7073d51254c26cd63b22a60835b8f948deb447/packages/experimental/hooks-claude-code/src/config.ts"
+    },
+    "DSH-LIMITATIONS": {
+      "title": "目标桥的行为范围和限制",
+      "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ce7073d51254c26cd63b22a60835b8f948deb447/packages/experimental/hooks-claude-code/README.md#known-limitations-and-deferred-work"
+    }
+  },
+  "unverified": [
+    "目标实际安装版本与规则快照是否一致",
+    "Hook 命令、脚本输出、依赖和 shell 行为",
+    "目标正则是否合法及实际工具名称是否匹配",
+    "其他配置层的合并、事件时序与实际运行结果"
+  ],
+  "case_source": {
+    "id": "context-mode",
+    "repository": "mksglu/context-mode",
+    "revision": "78d3dd080e4f52c9e3a81a63cd7eb369d8bb8d02",
+    "path": "hooks/hooks.json",
+    "sha256": "e1fdd0c0e82d164f119daa43803513b802ca5edab93bc123b2c7d8d4c637cf3e",
+    "expected_incompatible_events": [
+      "PreCompact"
+    ],
+    "url": "https://raw.githubusercontent.com/mksglu/context-mode/78d3dd080e4f52c9e3a81a63cd7eb369d8bb8d02/hooks/hooks.json"
+  }
+}

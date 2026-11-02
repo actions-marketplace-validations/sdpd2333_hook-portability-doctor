@@ -1,0 +1,32 @@
+{
+  "schema_version": "1",
+  "profile_id": "dsh-claude-ce7073d",
+  "target": "dsh-claude-bridge",
+  "target_package": "@deepseek-ai/dsh-hooks-claude-code",
+  "repository_revision": "ce7073d51254c26cd63b22a60835b8f948deb447",
+  "checked_date": "2026-11-03",
+  "recognized_events": ["SessionStart", "UserPromptSubmit", "PreToolUse", "PostToolUse", "Stop", "SubagentStart", "SubagentStop"],
+  "matcher_ignored_events": ["UserPromptSubmit", "Stop"],
+  "tool_matcher_events": ["PreToolUse", "PostToolUse"],
+  "handler_types": ["command"],
+  "retained_handler_fields": ["type", "command", "timeout"],
+  "ignored_options": {
+    "async": {"when": "true", "message": "async: true 不被采用；目标按事件的既定调度方式串行处理匹配命令，不保留此字段的后台执行语义。"},
+    "asyncRewake": {"when": "true", "message": "目标没有实现 asyncRewake 的唤醒语义。"},
+    "once": {"when": "true", "message": "once: true 不被采用；不能依赖该字段限制执行次数。"},
+    "args": {"when": "nonempty", "message": "独立 args 字段被忽略；目标只保留 command 字符串。"},
+    "if": {"when": "nonempty", "message": "if 条件不被采用；不能依赖该字段控制是否执行。"},
+    "shell": {"when": "nonempty", "message": "显式 shell 选择不被采用；实际执行 shell 需要核对。"},
+    "statusMessage": {"when": "nonempty", "message": "statusMessage 不会按该字段显示；这不等同于命令无法执行。"}
+  },
+  "evidence": {
+    "DSH-CONFIG": {
+      "title": "目标配置解析器：事件、处理器、字段和替换",
+      "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ce7073d51254c26cd63b22a60835b8f948deb447/packages/experimental/hooks-claude-code/src/config.ts"
+    },
+    "DSH-LIMITATIONS": {
+      "title": "目标桥的行为范围和限制",
+      "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ce7073d51254c26cd63b22a60835b8f948deb447/packages/experimental/hooks-claude-code/README.md#known-limitations-and-deferred-work"
+    }
+  }
+}

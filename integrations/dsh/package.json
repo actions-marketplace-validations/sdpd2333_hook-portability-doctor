@@ -1,0 +1,8 @@
+{
+  "name": "hook-portability-doctor-dsh-contracts",
+  "private": true,
+  "description": "Optional, model-free contract checks against the published DSH bridge",
+  "dependencies": {
+    "@deepseek-ai/dsh-hooks-claude-code": "0.2.1-rc.5"
+  }
+}

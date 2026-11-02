@@ -1,0 +1,297 @@
+{
+  "schema_version": "1",
+  "analyzer_version": "0.1.0",
+  "target": "dsh-claude-bridge",
+  "profile_id": "dsh-claude-ce7073d",
+  "target_package": "@deepseek-ai/dsh-hooks-claude-code",
+  "repository_revision": "ce7073d51254c26cd63b22a60835b8f948deb447",
+  "profile_checked_date": "2026-11-03",
+  "target_runtime_verified": false,
+  "execution_verified": false,
+  "input": {
+    "file": "thedotmack/claude-mem@02584c4ac9d9/plugin/hooks/hooks.json",
+    "sha256": "8a231036f088798179ae54e8f2b792334191289148b4461698dc1823b51024a2",
+    "format": "wrapped"
+  },
+  "context": {
+    "plugin_root_provided": false,
+    "project_dir_provided": false
+  },
+  "summary": {
+    "status": "incompatibilities_found",
+    "event_types": 9,
+    "configured_handlers": 11,
+    "candidate_command_handlers": 8,
+    "finding_count": 19,
+    "affected_locations": 20,
+    "categories": {
+      "incompatible": 3,
+      "behavior_change": 12,
+      "configuration": 0,
+      "manual_review": 4
+    }
+  },
+  "findings": [
+    {
+      "id": "a8dcbb15fe68",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/PostToolUse/0/hooks/0/args",
+      "message": "独立 args 字段被忽略；目标只保留 command 字符串。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "71edb856aa32",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/PostToolUse/0/hooks/0/async",
+      "message": "async: true 不被采用；目标按事件的既定调度方式串行处理匹配命令，不保留此字段的后台执行语义。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "4059ce61c996",
+      "rule_id": "HP006",
+      "category": "manual_review",
+      "certainty": "needs-context",
+      "pointer": "/hooks/PostToolUse/0/matcher",
+      "message": "工具名与目标正则语义需要运行核对。",
+      "suggestion": "核对实际匹配主体；本工具不使用 Python 正则冒充目标正则验证。",
+      "evidence_ids": [
+        "DSH-CONFIG"
+      ],
+      "related_pointers": [
+        "/hooks/PostToolUse/0/matcher",
+        "/hooks/PreToolUse/0/matcher"
+      ]
+    },
+    {
+      "id": "f565c9736ea5",
+      "rule_id": "HP001",
+      "category": "incompatible",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/PostToolUseFailure",
+      "message": "目标不识别此事件，整组配置会在解析处理器之前被忽略。",
+      "suggestion": "核对源平台事件名称；需要保留该功能时寻找目标的原生入口。删除配置不等于完成迁移。",
+      "evidence_ids": [
+        "DSH-CONFIG"
+      ]
+    },
+    {
+      "id": "9ea6bc928176",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/PreToolUse/0/hooks/0/args",
+      "message": "独立 args 字段被忽略；目标只保留 command 字符串。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "98566e1f463d",
+      "rule_id": "HP001",
+      "category": "incompatible",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/SessionEnd",
+      "message": "目标不识别此事件，整组配置会在解析处理器之前被忽略。",
+      "suggestion": "核对源平台事件名称；需要保留该功能时寻找目标的原生入口。删除配置不等于完成迁移。",
+      "evidence_ids": [
+        "DSH-CONFIG"
+      ]
+    },
+    {
+      "id": "1812dd689c31",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/SessionStart/0/hooks/0/args",
+      "message": "独立 args 字段被忽略；目标只保留 command 字符串。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "ab65b9e8a5cf",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/SessionStart/0/hooks/0/async",
+      "message": "async: true 不被采用；目标按事件的既定调度方式串行处理匹配命令，不保留此字段的后台执行语义。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "760f710ace46",
+      "rule_id": "HP008",
+      "category": "manual_review",
+      "certainty": "needs-context",
+      "pointer": "/hooks/SessionStart/0/matcher",
+      "message": "该事件的匹配主体和目标正则语义尚未验证。",
+      "suggestion": "核对实际匹配主体；本工具不使用 Python 正则冒充目标正则验证。",
+      "evidence_ids": [
+        "DSH-CONFIG"
+      ]
+    },
+    {
+      "id": "692269fd8e58",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/SessionStart/1/hooks/0/args",
+      "message": "独立 args 字段被忽略；目标只保留 command 字符串。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "99d67f026e71",
+      "rule_id": "HP008",
+      "category": "manual_review",
+      "certainty": "needs-context",
+      "pointer": "/hooks/SessionStart/1/matcher",
+      "message": "该事件的匹配主体和目标正则语义尚未验证。",
+      "suggestion": "核对实际匹配主体；本工具不使用 Python 正则冒充目标正则验证。",
+      "evidence_ids": [
+        "DSH-CONFIG"
+      ]
+    },
+    {
+      "id": "8c91999fb9a8",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/SessionStart/2/hooks/0/args",
+      "message": "独立 args 字段被忽略；目标只保留 command 字符串。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "322d1d2f8ecc",
+      "rule_id": "HP008",
+      "category": "manual_review",
+      "certainty": "needs-context",
+      "pointer": "/hooks/SessionStart/2/matcher",
+      "message": "该事件的匹配主体和目标正则语义尚未验证。",
+      "suggestion": "核对实际匹配主体；本工具不使用 Python 正则冒充目标正则验证。",
+      "evidence_ids": [
+        "DSH-CONFIG"
+      ]
+    },
+    {
+      "id": "7118a5004e72",
+      "rule_id": "HP001",
+      "category": "incompatible",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/Setup",
+      "message": "目标不识别此事件，整组配置会在解析处理器之前被忽略。",
+      "suggestion": "核对源平台事件名称；需要保留该功能时寻找目标的原生入口。删除配置不等于完成迁移。",
+      "evidence_ids": [
+        "DSH-CONFIG"
+      ]
+    },
+    {
+      "id": "4ee14dc5d5ac",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/Stop/0/hooks/0/args",
+      "message": "独立 args 字段被忽略；目标只保留 command 字符串。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "a209e11c2bd6",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/Stop/0/hooks/0/async",
+      "message": "async: true 不被采用；目标按事件的既定调度方式串行处理匹配命令，不保留此字段的后台执行语义。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "8aedabaa39e6",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/SubagentStop/0/hooks/0/args",
+      "message": "独立 args 字段被忽略；目标只保留 command 字符串。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "d77b0ff03325",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/SubagentStop/0/hooks/0/async",
+      "message": "async: true 不被采用；目标按事件的既定调度方式串行处理匹配命令，不保留此字段的后台执行语义。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    },
+    {
+      "id": "b2011fc3e81a",
+      "rule_id": "HP003",
+      "category": "behavior_change",
+      "certainty": "confirmed-for-profile",
+      "pointer": "/hooks/UserPromptSubmit/0/hooks/0/args",
+      "message": "独立 args 字段被忽略；目标只保留 command 字符串。",
+      "suggestion": "核对是否依赖此选项；在目标中验证替代方式。",
+      "evidence_ids": [
+        "DSH-LIMITATIONS"
+      ]
+    }
+  ],
+  "evidence": {
+    "DSH-CONFIG": {
+      "title": "目标配置解析器：事件、处理器、字段和替换",
+      "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ce7073d51254c26cd63b22a60835b8f948deb447/packages/experimental/hooks-claude-code/src/config.ts"
+    },
+    "DSH-LIMITATIONS": {
+      "title": "目标桥的行为范围和限制",
+      "url": "https://github.com/deepseek-ai/deepseek-harness/blob/ce7073d51254c26cd63b22a60835b8f948deb447/packages/experimental/hooks-claude-code/README.md#known-limitations-and-deferred-work"
+    }
+  },
+  "unverified": [
+    "目标实际安装版本与规则快照是否一致",
+    "Hook 命令、脚本输出、依赖和 shell 行为",
+    "目标正则是否合法及实际工具名称是否匹配",
+    "其他配置层的合并、事件时序与实际运行结果"
+  ],
+  "case_source": {
+    "id": "claude-mem",
+    "repository": "thedotmack/claude-mem",
+    "revision": "02584c4ac9d92fea45adf5c61e22c546b5738621",
+    "path": "plugin/hooks/hooks.json",
+    "sha256": "8a231036f088798179ae54e8f2b792334191289148b4461698dc1823b51024a2",
+    "expected_incompatible_events": [
+      "PostToolUseFailure",
+      "SessionEnd",
+      "Setup"
+    ],
+    "url": "https://raw.githubusercontent.com/thedotmack/claude-mem/02584c4ac9d92fea45adf5c61e22c546b5738621/plugin/hooks/hooks.json"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "python": "3.14.8",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "tests_run": 45,
+  "failures": 0,
+  "errors": 0,
+  "scenarios": [
+    {
+      "scenario": "supported",
+      "name": "最小支持配置",
+      "passed": true,
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "summary": {
+        "status": "no_static_differences_found",
+        "event_types": 1,
+        "configured_handlers": 1,
+        "candidate_command_handlers": 1,
+        "finding_count": 0,
+        "affected_locations": 0,
+        "categories": {
+          "incompatible": 0,
+          "behavior_change": 0,
+          "configuration": 0,
+          "manual_review": 0
+        }
+      },
+      "stderr": ""
+    },
+    {
+      "scenario": "gaps",
+      "name": "迁移差异与严格模式",
+      "passed": true,
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "summary": {
+        "status": "incompatibilities_found",
+        "event_types": 4,
+        "configured_handlers": 5,
+        "candidate_command_handlers": 2,
+        "finding_count": 8,
+        "affected_locations": 8,
+        "categories": {
+          "incompatible": 3,
+          "behavior_change": 2,
+          "configuration": 1,
+          "manual_review": 2
+        }
+      },
+      "stderr": ""
+    },
+    {
+      "scenario": "root-unknown",
+      "name": "未提供根目录上下文",
+      "passed": true,
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "summary": {
+        "status": "review_required",
+        "event_types": 1,
+        "configured_handlers": 1,
+        "candidate_command_handlers": 1,
+        "finding_count": 1,
+        "affected_locations": 1,
+        "categories": {
+          "incompatible": 0,
+          "behavior_change": 0,
+          "configuration": 1,
+          "manual_review": 0
+        }
+      },
+      "stderr": ""
+    },
+    {
+      "scenario": "root-provided",
+      "name": "补充根目录后复查",
+      "passed": true,
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "summary": {
+        "status": "no_static_differences_found",
+        "event_types": 1,
+        "configured_handlers": 1,
+        "candidate_command_handlers": 1,
+        "finding_count": 0,
+        "affected_locations": 0,
+        "categories": {
+          "incompatible": 0,
+          "behavior_change": 0,
+          "configuration": 0,
+          "manual_review": 0
+        }
+      },
+      "stderr": ""
+    }
+  ],
+  "actual_hook_execution_tested": false,
+  "client_discovery_tested": false
+}

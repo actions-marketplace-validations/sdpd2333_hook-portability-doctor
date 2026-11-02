@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hook Portability Doctor"
+  short_description: "Check Claude-to-DSH hook portability with evidence"
+  default_prompt: "Use $hook-portability-doctor to inspect this Claude hook configuration for DSH compatibility."

@@ -1,0 +1,93 @@
+{
+  "verified_date": "2026-11-03",
+  "platform": "Windows 11",
+  "checker_version": "0.1.0",
+  "profile": "dsh-claude-ce7073d",
+  "input_sha256": "cca494cc9d665bde28fe9a4b46bdb05b97c0458ca47d07eba588c00aed49bdd4",
+  "clients": [
+    {
+      "client": "Claude Code",
+      "version": "2.1.316",
+      "native_skill_loaded": true,
+      "explicit_skill_request": true,
+      "tool_sequence": [
+        "Skill",
+        "Bash",
+        "Read"
+      ],
+      "exit_code": 0,
+      "report_matches_cli_baseline": true,
+      "input_unchanged": true,
+      "skill_sha256_lf": "1da56cff981a8496c67bf531d47604a23e98e6da5ded6be053da399c54b1493d",
+      "report_summary": {
+        "status": "incompatibilities_found",
+        "event_types": 4,
+        "configured_handlers": 5,
+        "candidate_command_handlers": 2,
+        "finding_count": 8,
+        "affected_locations": 8,
+        "categories": {
+          "incompatible": 3,
+          "behavior_change": 2,
+          "configuration": 1,
+          "manual_review": 2
+        }
+      }
+    },
+    {
+      "client": "DSH headless",
+      "version": "0.2.1-rc.5",
+      "native_skill_loaded": true,
+      "explicit_skill_request": true,
+      "tool_sequence": [
+        "skill",
+        "pwsh",
+        "read",
+        "pwsh",
+        "pwsh",
+        "read"
+      ],
+      "exit_code": 0,
+      "report_matches_cli_baseline": true,
+      "input_unchanged": true,
+      "skill_sha256_lf": "1da56cff981a8496c67bf531d47604a23e98e6da5ded6be053da399c54b1493d",
+      "report_summary": {
+        "status": "incompatibilities_found",
+        "event_types": 4,
+        "configured_handlers": 5,
+        "candidate_command_handlers": 2,
+        "finding_count": 8,
+        "affected_locations": 8,
+        "categories": {
+          "incompatible": 3,
+          "behavior_change": 2,
+          "configuration": 1,
+          "manual_review": 2
+        }
+      }
+    }
+  ],
+  "self_authored_hook_execution": {
+    "package": "@deepseek-ai/dsh-hooks-claude-code",
+    "version": "0.2.1-rc.5",
+    "module_sha256": "c4f3f5d92c82e790593d977d95eef0afa4ffad07bb9b9d1609ae613fe6a76283",
+    "installed_for_test_only": true,
+    "observed_events": [
+      "PreToolUse",
+      "SessionStart",
+      "Stop",
+      "UserPromptSubmit"
+    ],
+    "cwd_and_project_context_match": true,
+    "independent_args_not_appended": true,
+    "read_tool_match_observed": true,
+    "ignored_matchers_did_not_reject_config": true,
+    "third_party_hook_commands_executed": false
+  },
+  "limitations": [
+    "Explicit skill request, not a general automatic-selection evaluation",
+    "Published bridge Git revision not established; selected contracts only",
+    "Third-party plugins have not been executed end to end",
+    "Codex native discovery not tested"
+  ]
+}

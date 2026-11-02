@@ -1,0 +1,65 @@
+[
+  {
+    "case": "context-mode",
+    "input_sha256": "e1fdd0c0e82d164f119daa43803513b802ca5edab93bc123b2c7d8d4c637cf3e",
+    "incompatible_events": [
+      "PreCompact"
+    ],
+    "summary": {
+      "status": "incompatibilities_found",
+      "event_types": 6,
+      "configured_handlers": 14,
+      "candidate_command_handlers": 13,
+      "finding_count": 3,
+      "affected_locations": 24,
+      "categories": {
+        "incompatible": 1,
+        "behavior_change": 0,
+        "configuration": 1,
+        "manual_review": 1
+      }
+    }
+  },
+  {
+    "case": "claude-mem",
+    "input_sha256": "8a231036f088798179ae54e8f2b792334191289148b4461698dc1823b51024a2",
+    "incompatible_events": [
+      "PostToolUseFailure",
+      "SessionEnd",
+      "Setup"
+    ],
+    "summary": {
+      "status": "incompatibilities_found",
+      "event_types": 9,
+      "configured_handlers": 11,
+      "candidate_command_handlers": 8,
+      "finding_count": 19,
+      "affected_locations": 20,
+      "categories": {
+        "incompatible": 3,
+        "behavior_change": 12,
+        "configuration": 0,
+        "manual_review": 4
+      }
+    }
+  },
+  {
+    "case": "superpowers",
+    "input_sha256": "47fd72cc8bedf31c72702b35b4ed7bab670294d658c4ce518330337525a3798b",
+    "incompatible_events": [],
+    "summary": {
+      "status": "behavior_changes_found",
+      "event_types": 1,
+      "configured_handlers": 1,
+      "candidate_command_handlers": 1,
+      "finding_count": 3,
+      "affected_locations": 3,
+      "categories": {
+        "incompatible": 0,
+        "behavior_change": 1,
+        "configuration": 1,
+        "manual_review": 1
+      }
+    }
+  }
+]

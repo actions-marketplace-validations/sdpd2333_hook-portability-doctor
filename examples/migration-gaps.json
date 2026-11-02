@@ -1,0 +1,9 @@
+{
+  "description": "Original synthetic example. The checker must never run these commands.",
+  "hooks": {
+    "PreCompact": [{"hooks": [{"type": "command", "command": "python snapshot.py"}]}],
+    "Notification": [{"hooks": [{"type": "command", "command": "python notify.py"}]}],
+    "PreToolUse": [{"matcher": "Bash|Read", "hooks": [{"type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/guard.mjs\"", "async": true}]}],
+    "Stop": [{"matcher": "specific-session", "hooks": [{"type": "prompt", "prompt": "Inspect whether work is complete"}, {"type": "command", "command": "python done.py", "args": ["--verbose"]}]}]
+  }
+}

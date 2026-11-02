@@ -131,7 +131,8 @@ class ActionTest(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(self.input.read_bytes(), before)
         self.assertFalse(marker.exists())
-        self.assertEqual(Path(outputs["report-json"]), self.reports / "report.json")
+        # Windows runners may spell the temp directory with an 8.3 path alias.
+        self.assertTrue(Path(outputs["report-json"]).samefile(self.reports / "report.json"))
 
     def test_context_is_explicit_and_forwarded(self):
         self.config(command="node " + "$" + "{CLAUDE_PLUGIN_ROOT}/example.js")

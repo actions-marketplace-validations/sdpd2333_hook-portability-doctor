@@ -62,8 +62,10 @@ def verify(wheel, result):
             raise RuntimeError(f"Offline installation failed: {installation.stderr}")
         require("wheel installs offline in fresh environment", True)
         imported = run([python, "-c", "import hook_doctor; print(hook_doctor.__file__)"])
+        # Compare canonical paths when Windows exposes an 8.3 temp directory alias.
         require("imports resolve to installed package",
-                imported.returncode == 0 and Path(imported.stdout.strip()).is_relative_to(environment))
+                imported.returncode == 0
+                and Path(imported.stdout.strip()).resolve().is_relative_to(environment.resolve()))
 
         command = 'echo must-not-run > "hook-executed.txt"'
 

@@ -9,8 +9,9 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 NAME = "hook-portability-doctor"
-CONTENTS = ("SKILL.md", "LICENSE", "README.md", "CONTRIBUTING.md", "agents", "scripts",
-            "rules", "references", "examples", "tests", "docs", "integrations")
+CONTENTS = ("SKILL.md", "LICENSE", "README.md", "CONTRIBUTING.md", "pyproject.toml",
+            "MANIFEST.in", "CHANGELOG.md", "action.yml", "agents", "scripts",
+            "references", "examples", "tests", "docs", "integrations")
 
 
 def install(skills_dir):
@@ -33,7 +34,7 @@ def install(skills_dir):
             source = ROOT / name
             if source.is_dir():
                 shutil.copytree(source, bundle / name,
-                                ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "node_modules"))
+                                ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.egg-info", "node_modules"))
             else:
                 shutil.copyfile(source, bundle / name)
         bundle.rename(target)

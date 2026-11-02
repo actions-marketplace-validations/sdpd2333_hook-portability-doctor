@@ -4,6 +4,8 @@ __pycache__/
 .work/
 reports/
 dist/
+build/
+*.egg-info/
 node_modules/
 .DS_Store
 Thumbs.db

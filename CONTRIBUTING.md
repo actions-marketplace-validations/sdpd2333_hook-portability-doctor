@@ -6,6 +6,12 @@
 python scripts/acceptance.py
 ```
 
+改动包结构、CLI 入口或包资源后，还需[构建并验证 wheel](docs/DISTRIBUTION.md)。
+运行时和普通测试保持标准库依赖；build、setuptools、twine 仅用于构建与检查分发物。
+Action 修改需覆盖成功、严格模式失败、错误输入和旧报告隔离，并检查
+`.github/workflows/check.yml` 中的真实 runner 集成任务。修改固定规则时更新
+`scripts/hook_doctor/profiles/`，避免在仓库根目录另存一份运行规则。
+
 修改判定规则时，请附上：
 
 1. 目标仓库的固定提交与实际实现位置。

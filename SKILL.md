@@ -9,7 +9,7 @@ Use this skill for Claude hook configuration → DSH's Claude Hook bridge. The c
 
 ## Workflow
 
-1. Resolve the skill directory from the location of this `SKILL.md`, not the caller's working directory. Verify `scripts/check_hooks.py` and `rules/dsh-claude-ce7073d.json` are present. Accept a user-specified local JSON file or plugin directory. If no input is available, ask for its path; never substitute an unrelated configuration.
+1. Resolve the skill directory from the location of this `SKILL.md`, not the caller's working directory. Verify `scripts/check_hooks.py` and `scripts/hook_doctor/profiles/dsh-claude-ce7073d.json` are present. Accept a user-specified local JSON file or plugin directory. If no input is available, ask for its path; never substitute an unrelated configuration.
 2. Use the fixed profile `dsh-claude-ce7073d`, based on DSH commit `ce7073d51254c26cd63b22a60835b8f948deb447`. State that the user's installed target version has not been compared with this snapshot. Other migration routes require their own rules and are outside this skill.
 3. Run the bundled checker with properly quoted paths:
 

@@ -2,6 +2,7 @@
 
 from collections import Counter
 import hashlib
+from importlib.resources import as_file, files
 import math
 from pathlib import Path
 import re
@@ -9,7 +10,6 @@ import re
 from . import __version__
 from .loader import InputError, pointer, read_json
 
-ROOT = Path(__file__).resolve().parents[2]
 PROFILE_ID = "dsh-claude-ce7073d"
 CATEGORIES = ("incompatible", "behavior_change", "configuration", "manual_review")
 VARIABLE = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}")
@@ -18,7 +18,9 @@ VARIABLE = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}")
 def load_profile(profile_id=PROFILE_ID):
     if profile_id != PROFILE_ID:
         raise InputError(f"未知规则集：{profile_id}。可用规则集：{PROFILE_ID}")
-    profile, _ = read_json(ROOT / "rules" / (profile_id + ".json"))
+    resource = files("hook_doctor").joinpath("profiles", profile_id + ".json")
+    with as_file(resource) as path:
+        profile, _ = read_json(path)
     return profile
 
 

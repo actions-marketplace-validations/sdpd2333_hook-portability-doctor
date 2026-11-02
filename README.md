@@ -4,7 +4,21 @@
 
 例如：某插件的 `PreCompact` 事件在目标桥中会被忽略；某处理器的 `args`、`async` 配置不会被采用。检查器说明具体位置、影响、证据和下一步，同时把缺少环境信息的事项单独列出。
 
-**交付形态：Python CLI + 可供 AI 调用的 skill。** Python 3.11+，运行时仅用标准库，无需 API Key。版本 `0.1.0`，规则固定于 DSH 提交 `ce7073d51254c26cd63b22a60835b8f948deb447`。检查器不会执行输入中的 Hook 命令。
+**交付形态：可安装的 Python CLI + GitHub Action + AI skill。** Python 3.11+，运行时仅用标准库，无需 API Key。版本 `0.2.0`，规则固定于 DSH 提交 `ce7073d51254c26cd63b22a60835b8f948deb447`。检查器不会执行输入中的 Hook 命令。
+
+## 安装为命令行工具
+
+在源码仓库中安装到自己的 Python 虚拟环境：
+
+```shell
+python -m pip install .
+hook-portability-doctor --version
+hook-portability-doctor "path/to/plugin/hooks/hooks.json" --strict --out reports/my-plugin
+```
+
+也可以安装构建好的 wheel 文件。若命令不在 PATH，使用同一环境的 `python -m hook_doctor`。规则数据随包安装，可以从任意工作目录运行。CLI 包只包含检查器；skill、真实案例和开发验收入口保留在源码仓库中。
+
+这份文档不假定已发布到 PyPI；本地安装与 wheel 验收见[分发指南](docs/DISTRIBUTION.md)。
 
 ## 直接验收
 
@@ -14,7 +28,7 @@
 python scripts/acceptance.py
 ```
 
-预期输出：`PASS: 45 tests, 4 CLI scenarios`。打开生成的 `reports/acceptance/ACCEPTANCE.md`，查看四个场景及完整测试日志。此命令离线运行，不要求安装 Codex、Claude Code 或 DSH。
+预期输出：`PASS: 59 tests, 4 CLI scenarios`。打开生成的 `reports/acceptance/ACCEPTANCE.md`，查看四个场景及完整测试日志。此命令离线运行，不要求安装 Codex、Claude Code 或 DSH。
 
 最直观的演示是：
 
@@ -68,6 +82,12 @@ python scripts/check_hooks.py examples/migration-gaps.json --target dsh-claude-b
 
 规则覆盖 HP001–HP008，详见 [规则依据](references/rule-evidence.md)。`no_hooks`、`no_handlers` 和 `no_static_differences_found` 是不同结果，均不能当作实际迁移成功。
 
+## 在 GitHub Actions 中检查
+
+仓库根目录的 `action.yml` 可作为 composite action 使用。提供 `path` 后，它默认以严格模式运行，写入 JSON / Markdown 报告和步骤摘要，导出报告路径、状态及不兼容数量。输入格式错误时不会导出旧报告。
+
+在本仓库 checkout 后可使用 `uses: ./`；跨仓库引用、报告上传和失败处理见 [GitHub Action 接入](docs/GITHUB_ACTION.md)。本次代码发布前，其他仓库不能通过已有 main 分支获得新增 Action。
+
 ## 三个真实配置案例
 
 输入固定到提交和 SHA-256。以下数量来自已执行的静态扫描，报告在仓库内可直接阅读。
@@ -106,7 +126,7 @@ python scripts/run_cases.py --fetch --out examples/case-results
 
 也可以安装到另一个项目的 skill 根目录，例如 `python scripts/install_skill.py --skills-dir "<project>/.claude/skills"` 或对应的 `.dsh/skills`。脚本不覆盖已有同名 skill。加载后按客户端方式显式调用。调用端与受检协议分别说明：在 Codex 中调用，并不表示支持 Codex Hook 配置迁移。
 
-已在 Claude Code **2.1.316**、DSH **0.2.1-rc.5** 完成原生 skill 调用与报告生成；DSH 自建 Hook 实际触发了四种事件。另有八项真实桥模块契约检查。复现方式见 [原生客户端验证](docs/native-clients.md)，范围和证据见 [验证记录](docs/verification.md)。第三方插件完整运行仍需分别验证。
+`0.1.0` 曾在 Claude Code **2.1.316**、DSH **0.2.1-rc.5** 完成原生 skill 调用与报告生成；DSH 自建 Hook 实际触发了四种事件。另有八项真实桥模块契约检查。复现方式见 [原生客户端验证](docs/native-clients.md)，本版本与历史记录的边界见 [验证记录](docs/verification.md)。第三方插件完整运行仍需分别验证。
 
 ## 范围与已知限制
 
@@ -127,8 +147,8 @@ python scripts/acceptance.py
 
 可选目标桥验证：`npm ci --prefix integrations/dsh --ignore-scripts --no-audit --no-fund`，随后运行 `node scripts/verify_dsh_bridge.mjs`。这项检查不调用模型；Node/npm 不属于普通 Python 检查器的运行依赖。
 
-GitHub Actions 覆盖 Windows / Ubuntu 的 Python 3.11、3.14 验收和 Node 24 桥模块契约检查；具体提交的状态见仓库 Actions。规则更新要求固定源码版本、检查边界和回归样例，见 [贡献指南](CONTRIBUTING.md)。
+GitHub Actions 配置了 Windows / Ubuntu 的 Python 3.11、3.14 验收与包安装检查、两平台的 Action 集成检查及 Node 24 桥模块契约检查；实际执行状态见对应提交的 Actions。规则更新要求固定源码版本、检查边界和回归样例，见 [贡献指南](CONTRIBUTING.md)。
 
-项目结构：`scripts/` 为实现，`rules/` 为目标快照，`tests/` 为行为测试，`examples/` 为自建示例与真实案例元数据，`references/` 为证据说明。`reports/`、`.work/` 和缓存均不纳入 Git。
+项目结构：`scripts/hook_doctor/` 为运行包，其中 `profiles/` 为目标快照；`scripts/` 另含源码入口和验收工具，`tests/` 为行为测试，`examples/` 为自建示例与真实案例元数据，`references/` 为证据说明。`reports/`、`.work/`、构建产物和缓存均不纳入 Git。
 
 MIT 许可。本工具由独立项目维护，与案例项目及各 AI 客户端无隶属关系。

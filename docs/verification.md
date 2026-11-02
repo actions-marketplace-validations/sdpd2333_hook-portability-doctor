@@ -1,5 +1,27 @@
 # 验证记录
 
+## 0.2.0：安装包与 CI 接入
+
+2026-11-03，在 Windows 11 / Python 3.14.8 上完成：
+
+| 检查 | 实际结果 | 复现 |
+|---|---|---|
+| 行为、skill 安装、Action 适配器 | 59 项测试通过，其中 Action 14 项 | `python scripts/acceptance.py` |
+| 源码 CLI | 4 个场景通过 | 同上 |
+| wheel / sdist 构建及元数据 | 构建成功，twine 两项通过 | [分发指南](DISTRIBUTION.md) |
+| 全新环境离线 wheel 安装与运行 | 60 项断言通过，两个命令入口、仓库外目录 | `python scripts/verify_distribution.py` |
+| 固定真实配置案例 | 3 份摘要及预期事件一致 | `python scripts/run_cases.py --fetch` |
+| 工作流静态检查 | actionlint 1.7.12 通过 | `actionlint .github/workflows/check.yml` |
+
+[机器可读摘要](v0.2.0-verification.json) 记录本轮范围。详细运行日志在忽略目录
+`reports/acceptance/`、`reports/package-verification.json`、`reports/cases/`。
+原生客户端未在本轮重跑；下文 0.1.0 记录保留为历史证据。
+
+Ubuntu、Python 3.11 和真实 GitHub composite runner 的任务已加入 CI，
+此处不把本机适配器测试视作它们已经通过；具体状态需查看本轮提交的 Actions。
+
+## 0.1.0：历史验证
+
 更新：2026-11-03。检查器 `0.1.0`，本机 Windows 11 / Python 3.14.8 / Node 24.20.0。
 
 | 层次 | 实际结果 | 证据 |

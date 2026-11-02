@@ -16,6 +16,51 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: python scripts/acceptance.py
+      - run: python -m pip install build twine
+      - run: python -m build
+      - run: python -m twine check dist/*
+      - run: python scripts/verify_distribution.py
+  action-integration:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - id: supported
+        uses: ./
+        with:
+          path: examples/minimal-supported.json
+          output-directory: reports/action-supported
+      - id: incompatible
+        continue-on-error: true
+        uses: ./
+        with:
+          path: examples/migration-gaps.json
+          output-directory: reports/action-incompatible
+      - name: Verify composite action outputs
+        shell: bash
+        env:
+          SUPPORTED_EXIT: ${{ steps.supported.outputs.exit-code }}
+          SUPPORTED_REPORT: ${{ steps.supported.outputs.report-json }}
+          INCOMPATIBLE_EXIT: ${{ steps.incompatible.outputs.exit-code }}
+          INCOMPATIBLE_REPORT: ${{ steps.incompatible.outputs.report-json }}
+          INCOMPATIBLE_OUTCOME: ${{ steps.incompatible.outcome }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          assert os.environ["SUPPORTED_EXIT"] == "0"
+          assert os.environ["INCOMPATIBLE_EXIT"] == "1"
+          assert os.environ["INCOMPATIBLE_OUTCOME"] == "failure"
+          supported = json.loads(Path(os.environ["SUPPORTED_REPORT"]).read_text(encoding="utf-8"))
+          incompatible = json.loads(Path(os.environ["INCOMPATIBLE_REPORT"]).read_text(encoding="utf-8"))
+          assert not supported["findings"]
+          assert incompatible["summary"]["categories"]["incompatible"] > 0
+          assert not incompatible["execution_verified"]
+          PY
   dsh-contracts:
     strategy:
       fail-fast: false

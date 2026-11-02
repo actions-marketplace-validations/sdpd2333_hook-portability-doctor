@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "checked_date": "2026-11-03",
+  "environment": {
+    "os": "Windows 11",
+    "python": "3.14.8"
+  },
+  "unit_tests": {"passed": 59, "failures": 0, "errors": 0, "includes_action_tests": 14},
+  "source_cli_scenarios": {"passed": 4},
+  "wheel_install_checks": {
+    "passed": 60,
+    "fresh_venv": true,
+    "outside_repository": true,
+    "offline_install": true,
+    "entrypoints": ["hook-portability-doctor", "python -m hook_doctor"]
+  },
+  "build": {"sdist": true, "wheel_from_sdist": true, "twine_checks_passed": 2},
+  "pinned_cases": {"passed": 3},
+  "workflow_lint": {"tool": "actionlint", "version": "1.7.12", "passed": true},
+  "github_runner_verified": false,
+  "linux_verified": false,
+  "python_3_11_verified_locally": false,
+  "native_clients_retested": false,
+  "scanned_hooks_execution_verified": false
+}

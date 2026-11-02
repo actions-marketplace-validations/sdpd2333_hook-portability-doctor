@@ -1,0 +1,58 @@
+name: Hook Portability Doctor
+description: Check Claude Hook configuration against a pinned DSH bridge profile.
+branding:
+  icon: check-circle
+  color: blue
+inputs:
+  path:
+    description: JSON file or plugin directory, relative to the checked-out workspace.
+    required: true
+  strict:
+    description: Fail on confirmed incompatibilities; context and review notices do not fail.
+    default: 'true'
+  profile:
+    description: Pinned target profile; this is not the runner's installed DSH version.
+    default: dsh-claude-ce7073d
+  plugin-root:
+    description: Explicit target plugin root; omitted by default.
+    default: ''
+  project-dir:
+    description: Explicit target project directory; omitted by default.
+    default: ''
+  output-directory:
+    description: Report directory relative to the workspace.
+    default: reports/hook-portability
+outputs:
+  exit-code:
+    description: '0 completed, 1 strict incompatibility, 2 input/output error, 3 internal error.'
+    value: ${{ steps.check.outputs.exit-code }}
+  status:
+    description: Analysis status, only set when a new report was generated.
+    value: ${{ steps.check.outputs.status }}
+  incompatible-count:
+    description: Number of confirmed incompatible finding groups.
+    value: ${{ steps.check.outputs.incompatible-count }}
+  report-json:
+    description: Absolute path of the new JSON report, including on a strict failure.
+    value: ${{ steps.check.outputs.report-json }}
+  report-markdown:
+    description: Absolute path of the new Markdown report.
+    value: ${{ steps.check.outputs.report-markdown }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v7
+      with:
+        python-version: '3.11'
+    - id: check
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        HPD_ACTION_PATH: ${{ github.action_path }}
+        HPD_INPUT_PATH: ${{ inputs.path }}
+        HPD_STRICT: ${{ inputs.strict }}
+        HPD_PROFILE: ${{ inputs.profile }}
+        HPD_PLUGIN_ROOT: ${{ inputs.plugin-root }}
+        HPD_PROJECT_DIR: ${{ inputs.project-dir }}
+        HPD_OUTPUT_DIRECTORY: ${{ inputs.output-directory }}
+      run: python "$HPD_ACTION_PATH/scripts/run_action.py"

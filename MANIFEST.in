@@ -1,0 +1,11 @@
+include SKILL.md CONTRIBUTING.md CHANGELOG.md action.yml
+recursive-include agents *.yaml
+recursive-include scripts *.py *.mjs *.json
+recursive-include tests *.py
+recursive-include examples *.json *.md *.cjs
+recursive-include references *.md
+recursive-include docs *.md *.json
+include integrations/dsh/package.json integrations/dsh/package-lock.json
+include .github/workflows/check.yml
+global-exclude *.py[cod]
+prune scripts/hook_portability_doctor.egg-info

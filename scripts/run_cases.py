@@ -9,9 +9,12 @@ from pathlib import Path
 import sys
 import urllib.request
 
-from hook_doctor.analyzer import ROOT, analyze
+from hook_doctor import __version__
+from hook_doctor.analyzer import analyze
 from hook_doctor.loader import InputError, MAX_INPUT_BYTES, load_document, read_json
 from hook_doctor.report import write_reports
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def run(fetch=False, output=None):
@@ -26,7 +29,7 @@ def run(fetch=False, output=None):
         if not source.exists():
             if not fetch:
                 raise InputError(f"缺少 {case['id']} 的缓存；用 --fetch 获取固定提交的公开 JSON。")
-            request = urllib.request.Request(url, headers={"User-Agent": "hook-portability-doctor/0.1.0"})
+            request = urllib.request.Request(url, headers={"User-Agent": f"hook-portability-doctor/{__version__}"})
             with urllib.request.urlopen(request, timeout=30) as response:
                 raw = response.read(MAX_INPUT_BYTES + 1)
             if hashlib.sha256(raw).hexdigest() != case["sha256"]:

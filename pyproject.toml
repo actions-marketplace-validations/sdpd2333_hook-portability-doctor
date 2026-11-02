@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hook-portability-doctor"
+dynamic = ["version"]
+description = "Evidence-based static checks for Claude Hook configurations targeting the DSH bridge"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "sdpd2333"}]
+dependencies = []
+keywords = ["hooks", "claude", "dsh", "static-analysis", "compatibility"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.urls]
+Repository = "https://github.com/sdpd2333/hook-portability-doctor"
+Issues = "https://github.com/sdpd2333/hook-portability-doctor/issues"
+
+[project.scripts]
+hook-portability-doctor = "hook_doctor.cli:main"
+
+[tool.setuptools]
+packages = ["hook_doctor"]
+package-dir = {"" = "scripts"}
+include-package-data = false
+
+[tool.setuptools.dynamic]
+version = {attr = "hook_doctor.__version__"}
+
+[tool.setuptools.package-data]
+hook_doctor = ["profiles/*.json"]
